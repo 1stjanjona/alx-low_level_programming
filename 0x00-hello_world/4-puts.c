@@ -1,11 +1,16 @@
 #include <stdio.h>
+
 /**
- * main -description needed for the file
+ * main - Entry point
  *
- * use puts instead of printf and return to 0 for the new line
- * /
+ * Description: 'use puts instead of printf and return to 0 for the new line'
+ * @parameter: 'Programming is like building a multilingual puzzle'
+ *
+ * Return: Always 0 (Success)
+ */
+
 int main(void)
 {
-	puts("\"Programming is like building a multilingual puzzle");
+	puts("Programming is like building a multilingual puzzle\n");
 	return (0);
 }
