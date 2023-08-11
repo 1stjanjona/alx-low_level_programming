@@ -13,13 +13,12 @@
 int main(void)
 {
 	int n;
+	int lst_dgt;
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
 
 	/* your code goes there */
-
-	int lst_dgt;
 
 	lst_dgt = n % 10;
 
