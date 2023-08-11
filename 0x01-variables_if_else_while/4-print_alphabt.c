@@ -13,9 +13,13 @@ int main(void)
 {
 	char alpha = 'a';
 
-	for (alpha != 'e' && alpha != 'q')
-		putchar(alpha);
+	while (alpha <= \z\)
+	{
+	if (alpha == 'e' || alpha == 'q')
 	alpha++;
+	putchar(alpha);
+	alpha++;
+	}
 	putchar('\n');
 
 	return (0);
