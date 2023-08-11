@@ -5,7 +5,7 @@
 /**
  * main - Entry point
  *
- * Description: 'positive or negative'
+ * Description: 'Last digit'
  *
  * Return: Always 0 (Success)
 */
@@ -22,9 +22,6 @@ int main(void)
 	int lst_dgt;
 
 	lst_dgt = n % 10;
-
-	printf("Enter a number: ");
-	scanf("%d", &n, &lst_dgt);
 
 if (lst_dgt > 5)
 {
