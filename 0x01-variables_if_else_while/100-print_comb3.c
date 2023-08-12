@@ -27,9 +27,7 @@ int main(void)
 					putchar(' ');
 				}
 			}
-			j++;
 		}
-		i++;
 	}
 	putchar('\n');
 	return (0);
