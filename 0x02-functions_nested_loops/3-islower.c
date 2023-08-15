@@ -1,18 +1,16 @@
 #include "main.h"
 
 /**
- * _islower - Entry point
+ * _islower - Check the code
  *
- * Description: 'print lowercase character'
+ * @c: 'is 'c' lowercase'
  *
- * Return: Always 0 (Success)
+ * Return: 1 for 'c' is lowercase otherwise Always 0 (Success)
 */
 
 int _islower(int c)
 {
-	char c;
-
-	if (c >= 'a' && c <= 'z')
+	if (c > 96 && c < 123)
 	{
 		return (1);
 	}
@@ -21,4 +19,5 @@ int _islower(int c)
 		return (0);
 	}
 	_putchar('\n');
+	return (0);
 }
