@@ -3,15 +3,13 @@
 /**
  * _abs - check the value of an integer
  *
- * @int: 'compute the absolute value'
+ * @n: 'compute the absolute value'
  *
  * Return: Always 0 (Success)
 */
 
-int _abs(int)
+int _abs(int n)
 {
-	int n;
-
 	if (n >= 0)
 	{
 		_putchar(n);
