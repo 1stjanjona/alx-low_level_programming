@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * print_last_digit - check the digits of a number
+ * print_last_digit - check the digits of 'num'
  *
  * @num: 'print the last digit'
  *
@@ -14,11 +14,11 @@ int print_last_digit(int num)
 
 	if (num > 0)
 	{
-		lst_dgt = (n % 10);
+		lst_dgt = (num % 10);
 	}
 	else
 	{
-		lst_dgt = ((-1) * (n % 10));
+		lst_dgt = ((-1) * (num % 10));
 	}
 	_putchar(lst_dgt + '0');
 	_putchar('\n');
