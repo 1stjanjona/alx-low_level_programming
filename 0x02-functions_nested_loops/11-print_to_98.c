@@ -23,13 +23,17 @@ void print_to_98(int n)
 				printf("%d, ", i);
 
 			else
-				printf("98\n");
+				printf("%d\n", i);
 		}
 	}
 	else
 	{
-		for (n = i; i > 98; i--)
-			printf("%d, ", i);
+		for (n = i; i >= 98; i--)
+		{
+			if (i != 98)
+				printf("%d, ", i);
+			else
+				printf("%d\n", i)
+		}
 	}
-	printf("98\n");
 }
