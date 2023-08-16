@@ -12,7 +12,6 @@
 void print_to_98(int n)
 {
 	int i;
-	int j;
 
 	if (n <= 98)
 	{
@@ -21,7 +20,7 @@ void print_to_98(int n)
 			if (i != 98)
 				printf("%d, ", i);
 			else
-				printf("98\n")
+				printf("98\n");
 		}
 	}
 	else
