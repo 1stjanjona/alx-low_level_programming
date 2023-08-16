@@ -36,6 +36,9 @@ void print_times_table(int n)
 					_putchar((((i * j) / 10) % 10) + '0');
 				} else if ((i * j) <= 99 && (i * j) >= 10)
 				{
+					_putchar(',');
+					_putchar(' ');
+					_putchar(' ');
 					_putchar(((i * j) / 10) + '0');
 					_putchar(((i * j) % 10) + '0');
 				}
