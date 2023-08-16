@@ -20,15 +20,15 @@ void print_times_table(int n)
 			{
 				if (i == 0)
 				{
-					_putchar('0');
-					_putchar(',');
-					_putchar(' ');
+					_putchar((n * i) + '0');
 				}
 				else if (n < 4 && (n * i) <= 9 &&  i != 0)
 				{
-					_putchar((n * i) + '0');
 					_putchar(',');
 					_putchar(' ');
+					_putchar(' ');
+					_putchar((n * i) + '0');
+					_putchar('\n');
 				}
 				else if ((n * i) <= 25 && n < 6 && i != 0)
 				{
@@ -36,6 +36,7 @@ void print_times_table(int n)
 					_putchar(' ');
 					_putchar(((n * i) / 10) + '0');
 					_putchar(((n * i) % 10) + '0');
+					_putchar('\n');
 				}
 				else if ((n * i) <= 144 && n < 13 && i != 0)
 				{
@@ -49,5 +50,4 @@ void print_times_table(int n)
 		}
 		_putchar('\n');
 	}
-
 }
