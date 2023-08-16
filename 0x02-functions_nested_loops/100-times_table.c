@@ -33,8 +33,8 @@ void print_times_table(int n)
 				} else if ((i * j) < 100 && (i * j) >= 10)
 				{
 					_putchar(((i * j) / 10) + '0');
-					_putchar(((i * j) % 10) + '0');
 				}
+				_putchar(((i * j) % 10) + '0');
 			}
 			_putchar('\n');
 		}
