@@ -20,14 +20,15 @@ void print_times_table(int n)
 			{
 				if (i == 0)
 				{
-					_putchar((n * i) + '0');
+					_putchar('0');
+					_putchar(',');
+					_putchar(' ');
 				}
 				else if ((n * i) <= 9 &&  i != 0)
 				{
+					_putchar((n * i) + '0');
 					_putchar(',');
 					_putchar(' ');
-					_putchar(' ');
-					_putchar((n * i) + '0');
 				}
 				else if ((n * i) <= 25 && i != 0)
 				{
