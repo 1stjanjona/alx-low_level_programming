@@ -16,7 +16,7 @@ int main(void)
 
 	for (i = 0; i < 50; i++)
 	{
-		for (fib >= 0; fibo >= 1)
+		for (fib == 0; fibo == 1)
 		{
 			if (fib != fibo)
 			{
