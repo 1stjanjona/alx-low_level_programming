@@ -14,27 +14,37 @@ void print_times_table(int n)
 
 	if (n >= 0 && n <= 15)
 	{
-		for (n = 0; n <= 15; n++)
+		for (i = 0; i <= n; i++)
 		{
-			_putchar('0');
-
-			for (i = 1; i <= n; i++)
+			for (j = 0; j <= n; j++)
 			{
-				_putchar(',');
-				_putchar(' ');
-
-				if ((n * i) <= 9)
+				if (j == 0)
 				{
-					_putchar(' ');
+					_putchar((i * j) + '0');
 				}
-				else if ((n * i) <= 25)
+				else if ((i * j) <= 9 && j != 0)
 				{
+					_putchar(',');
 					_putchar(' ');
+					_putchar(' ');
+					_putchar(' ');
+					_putchar((i * j) + '0');
 				}
-				else if ((n * i) <= 144)
+				else if ((i * j) <= 99 & (i * j) >= 10)
 				{
-					_putchar(((n * i) / 100) + '0');
-					_putchar(((n * i) / 10) % 10 + '0');
+					_putchar(',');
+					_putchar(' ');
+					_putchar(' ');
+					_putchar(((i * j) / 10) + '0');
+					_putchar(((i * j) % 10) + '0');
+				}
+				else if ((n * i) >= 100)
+				{
+					_putchar(',');
+					_putchar(' ');
+					_putchar(((i * j) / 100) + '0');
+					_putchar((((i * j) / 10) % 10) + '0');
+					_putchar(((i * j) % 10) + '0');
 				}
 			}
 			_putchar('\n');
