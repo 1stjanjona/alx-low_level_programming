@@ -23,6 +23,6 @@ int main(void)
 		fibo = fib;
 		fib = sum_sum;
 	}
-	printf("lu\n", sum);
+	printf("%lu\n", sum);
 	return (0);
 }
