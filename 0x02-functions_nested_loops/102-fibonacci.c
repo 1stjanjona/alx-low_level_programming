@@ -19,7 +19,7 @@ int main(void)
 		sum = fib + fibo;
 		printf("%lu", sum);
 		fib = fibo;
-		sum = fibo;
+		fibo = sum;
 
 		if (i == 49)
 		{
