@@ -18,12 +18,12 @@ int main(void)
 	{
 		if (fib < 4000000 && (fib % 2) == 0)
 		{
-			sum += fib;
+			sum_sum += fib;
 		}
 		sum = fib + fibo;
 		fib = fibo;
 		fibo = sum;
 	}
-	printf("%lu\n", sum);
+	printf("%lu\n", sum_sum);
 	return (0);
 }
