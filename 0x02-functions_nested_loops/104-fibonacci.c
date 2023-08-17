@@ -21,7 +21,7 @@ int main(void)
 		fibo = sum;
 		printf("%lu", sum);
 
-		for (i < 97)
+		if (i < 97)
 		{
 			printf(", ");
 		}
