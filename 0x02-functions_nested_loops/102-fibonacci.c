@@ -18,6 +18,8 @@ int main(void)
 	{
 		sum = fib + fibo;
 		printf("%lu", sum);
+		fib = fibo;
+		sum = fibo;
 
 		if (i == 49)
 		{
