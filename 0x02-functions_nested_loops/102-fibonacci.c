@@ -16,17 +16,14 @@ int main(void)
 
 	for (i = 0; i < 50; i++)
 	{
-		for (fib == 0; fibo == 1)
+		if (fib != fibo)
 		{
-			if (fib != fibo)
-			{
-				sum = fib + fibo;
-				printf("%lu", sum);
-			}
-			else if (fib == fibo)
-			{
-				sum = fibo;
-			}
+			sum = fib + fibo;
+			printf("%lu", sum);
+		}
+		else if (fib == fibo)
+		{
+			sum = fibo;
 		}
 		if (i == 49)
 		{
