@@ -12,19 +12,13 @@
 int main(void)
 {
 	int i;
-	unsigned long fib, fibo, sum;
+	unsigned long fib = 0, fibo = 1, sum;
 
 	for (i = 0; i < 50; i++)
 	{
-		if (fib != fibo)
-		{
-			sum = fib + fibo;
-			printf("%lu", sum);
-		}
-		else if (fib == fibo)
-		{
-			sum = fibo;
-		}
+		sum = fib + fibo;
+		printf("%lu", sum);
+
 		if (i == 49)
 		{
 			printf("\n");
