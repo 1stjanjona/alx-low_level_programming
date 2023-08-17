@@ -16,12 +16,12 @@ int main(void)
 
 	for (i = 1; i <= 33; i++)
 	{
-		if (fib < 4000000 && (fib % 2) == 0)
-			sum += fib;
-		sum_sum = fib + fibo;
+		sum = fib + fibo;
+
+		if (sum < 4000000 && (sum % 2) == 0)
+			sum_sum += sum;
 		fib = fibo;
-		fibo = fib;
-		fib = sum_sum;
+		fibo = sum;
 	}
 	printf("%lu\n", sum);
 	return (0);
