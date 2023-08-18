@@ -12,6 +12,7 @@ int _isupper(int c)
 {
 	if (c <= 65 && c >= 90)
 	{
+		_ptchar('c: );
 		return (1);
 	}
 	_putchar('\n');
