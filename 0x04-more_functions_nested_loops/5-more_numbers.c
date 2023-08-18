@@ -16,7 +16,7 @@ void more_numbers(void)
 	{
 		for (j = 1; j < 10; j++)
 		{
-			_putchar("%d", i);
+			_putchar(i);
 		}
 	}
 	_putchar('\n');
