@@ -6,11 +6,9 @@
  * @a: 'multiply a to b'
  * @b: 'myltiply b to a'
  *
- * Return: Always 0.
+ * Return: mul of (a * b)
 */
 int mul(int a, int b)
 {
-	_putchar(a * b);
-	_ptchar('\n');
-	return (0);
+	return (a * b);
 }
