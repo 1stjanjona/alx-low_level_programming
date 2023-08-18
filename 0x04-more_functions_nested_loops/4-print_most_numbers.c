@@ -10,14 +10,14 @@
 
 void print_most_numbers(void)
 {
-	char a;
+	int a;
 
-	for (a = '0'; a <= '9'; a++)
+	for (a = 48; a <= 57; a++)
 	{
-		if (a == '2' || a == '4')
+		if (a == 50 || a == 52)
 		{
 			continue;
-			_putchar(a + '48');
+			_putchar(a + '0');
 		}
 	}
 	_ptchar('\n');
