@@ -10,17 +10,14 @@
 
 void print_most_numbers(void)
 {
-	int a;
+	char a;
 
-	if (a != 50 || a != 52)
+	for (a >= 48; a < 58; a++)
 	{
-		for (a >= 48; a < 58; a++)
+		if (a != '2' || a != '4')
 		{
 			_putchar(a);
 		}
 	}
-	else
-	{
 	_ptchar('\n');
-	}
 }
