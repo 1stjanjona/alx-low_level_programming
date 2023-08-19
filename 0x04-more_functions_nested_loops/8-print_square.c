@@ -10,6 +10,7 @@
 void print_square(int size)
 {
 	int sqr;
+	int i;
 
 	if (size <= 0)
 	{
@@ -17,10 +18,13 @@ void print_square(int size)
 	}
 	else
 	{
-		for (size == sqr)
+		for (sqr = 0; sqr < size; sqr++)
 		{
-			_putchar(35);
+			for (i = 0; i < size; i++)
+			{
+				_putchar(35);
+			}
+			_putchar('\n');
 		}
 	}
-	_putchar('\n');
 }
