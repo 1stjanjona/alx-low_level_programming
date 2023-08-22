@@ -12,13 +12,11 @@ void rev_string(char *s)
 {
 	int i;
 	int l;
-
-	l = strlen(s);
-
 	char *frst;
 	char *end;
 	char ch_s;
 
+	l = strlen(s);
 	frst = s;
 	end = s;
 
@@ -31,7 +29,7 @@ void rev_string(char *s)
 		ch_s = *end;
 		*end = *frst;
 		*frst = ch_s;
-		start++;
+		frst++;
 		end--;
 	}
 }
