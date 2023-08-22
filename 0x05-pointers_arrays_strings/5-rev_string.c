@@ -13,20 +13,20 @@ void rev_string(char *s)
 	int len = -1;
 	char s[i];
 	char rev_s[i];
-	char *s = s;
-	char *rev_s = rev_s;
+	char *str_s = s;
+	char *str_r = rev_s;
 
-	while (*s)
+	while (*str_s)
 	{
 		len++;
-		s++;
+		str_s++;
 	}
 	while (len > = 0)
 	{
-		s--;
-		*s = *rev_s;
-		s++;
+		str_s--;
+		*str_s = *str_r;
+		str_r++;
 		len--;
 	}
-	*rev_s = '\0';
+	*str_r = '\0';
 }
