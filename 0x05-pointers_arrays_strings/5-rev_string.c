@@ -1,4 +1,5 @@
 #include "main.h"
+#include <string.h>
 
 /**
  * rev_string - check the string
@@ -14,7 +15,9 @@ void rev_string(char *s)
 
 	l = strlen(s);
 
-	char *start, *end, ch;
+	char *start;
+	char *end;
+	char ch_s;
 
 	start = s;
 	end = s;
@@ -25,9 +28,9 @@ void rev_string(char *s)
 	}
 	for  (i = 0; i < l / 2; i++)
 	{
-		ch = *end;
+		ch_s = *end;
 		*end = *start;
-		*start = ch;
+		*start = ch_s;
 		start++;
 		end--;
 	}
