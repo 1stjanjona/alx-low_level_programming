@@ -15,11 +15,11 @@ void rev_string(char *s)
 
 	l = strlen(s);
 
-	char *start;
+	char *frst;
 	char *end;
 	char ch_s;
 
-	start = s;
+	frst = s;
 	end = s;
 
 	for (i = 0; i < l - 1; i++)
@@ -29,8 +29,8 @@ void rev_string(char *s)
 	for  (i = 0; i < l / 2; i++)
 	{
 		ch_s = *end;
-		*end = *start;
-		*start = ch_s;
+		*end = *frst;
+		*frst = ch_s;
 		start++;
 		end--;
 	}
