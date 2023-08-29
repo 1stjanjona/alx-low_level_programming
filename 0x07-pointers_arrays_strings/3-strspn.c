@@ -22,15 +22,15 @@ unsigned int _strspn(char *s, char *accept)
 				i++;
 				return (i);
 			}
+			else if (accept[j + 1] == '\0')
+			{
+				return (i);
+			}
 			else
 			{
 				break;
 			}
 			j++;
-		}
-		if (accept[j] == '\0')
-		{
-			return (i);
 		}
 		i++;
 	}
