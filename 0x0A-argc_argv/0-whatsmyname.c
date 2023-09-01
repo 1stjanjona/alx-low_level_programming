@@ -4,16 +4,15 @@
 /**
  * main - check the code
  *
- * @argc: 'size of the array string'
- * @argv: 'string array'
+ * @argc: 'argument count for array string argv'
+ * @argv: 'argument vector array, the program name'
  *
  * Return: always 0.
 */
 int main(int argc, char *argv[])
 {
-	if (argc > 1)
-	{
-		printf("%s\n", argv[0]);
-	}
+	argc = argc;
+
+	printf("%s\n", argv[0]);
 	return (0);
 }
