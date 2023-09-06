@@ -37,7 +37,6 @@ char *str_concat(char *s1, char *s2)
 
 	if (str == NULL)
 	{
-		free(str);
 		return (NULL);
 	}
 	while (i <= size1 && s1[i] != '\0')
