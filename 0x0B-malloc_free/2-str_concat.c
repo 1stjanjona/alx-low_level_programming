@@ -32,10 +32,11 @@ char *str_concat(char *s1, char *s2)
 		size2++;
 	}
 
-	str = (char *)malloc(sizeof(char) * (size1 + size2 + 1));
+	str = (char *)malloc(sizeof(char) * (size1 + 1 + size2 + 1));
 
 	if (str == NULL)
 	{
+		free(str);
 		return (NULL);
 	}
 
