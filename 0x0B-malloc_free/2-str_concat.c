@@ -14,6 +14,7 @@ char *str_concat(char *s1, char *s2)
 {
 	int i = 0;
 	int j = 0;
+	int size1, size2;
 	char *str;
 
 	if (s1 == NULL)
@@ -24,30 +25,31 @@ char *str_concat(char *s1, char *s2)
 	{
 		s2 = " ";
 	}
-
-	if (i == j)
+	size1 = 0, size2 = 0;
+	while (s1[size1] != '\0' && s2[size2] != '\0')
 	{
-		while (s1[i] != '\0' && s2[i] != '\0')
-		{
-			i++;
-		}
+		size1++;
+		size2++;
 	}
 
-	str = (char *)malloc(sizeof(char) * (i + i + 1));
+	str = (char *)malloc(sizeof(char) * (size1 + size2 + 1));
 
 	if (str == NULL)
 	{
 		return (NULL);
 	}
 
-	for (i = j = 0; str[i]; i++)
+	while (i < size1 && s1[i] != '\0')
 	{
-		while (s1[i] != '\0' && s2[j] != '\0')
-		{
-			str[i] = s1[i];
-			str[j] = s2[j];
-		}
+		str[i] = s1[i];
+		i++;
 	}
-	str[i] = str[j] = '\0';
+	while (j < size2 && s2[j] != '\0')
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[i] = '\0';
 	return (str);
 }
