@@ -39,7 +39,7 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 
 	if (str == NULL)
 	{
-		return (NULL);
+		str = "";
 	}
 	while (i <= size1 && s1[i] != '\0')
 	{
