@@ -13,7 +13,7 @@
 */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	unsigned int size1 = 1, size2 = 1, sum1 = 0, sum2 = 0, i = 0, j = 0;
+	unsigned int size1 = 1, size2 = 1, sum = 0, i = 0, j = 0;
 	char *str;
 
 	if (s1 == NULL)
@@ -29,14 +29,10 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if (n >= size2)
 	{
 		n = size2;
-		sum1 = size1 + n;
-		str = malloc(sizeof(char) * (sum1 + 1));
+		sum = size1 + n;
 	}
-	else if (n < size2)
-	{
-		sum2 = size1 + size2;
-		str = malloc(sizeof(char) * (sum2 + 1));
-	}
+	str = malloc(sizeof(char) * (sum + 1));
+
 	if (str == NULL)
 	{
 		return (0);
