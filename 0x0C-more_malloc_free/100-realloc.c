@@ -34,22 +34,17 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	{
 		return (NULL);
 	}
-	if (new_ptr != NULL && ptr != NULL)
+	for (i = 0; i < old_size || i < new_size; i++)
 	{
-		for (i = 0; i < old_size || i < new_size; i++)
+		if (new_size != old_size)
 		{
-			if (new_size != old_size)
-			{
-				new_ptr[i] = ((char *)ptr)[i];
-			}
-			if (new_size == old_size)
-			{
-				return (NULL);
-			}
+			new_ptr[i] = ((char *)ptr)[i];
 		}
-		free(ptr);
-		return (new_ptr);
+		if (new_size == old_size)
+		{
+			return (NULL);
+		}
 	}
-	else
-		return (NULL);
+	free(ptr);
+	return (new_ptr);
 }
