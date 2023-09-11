@@ -3,11 +3,12 @@
 
 /**
  * struct dog - ID of a dog
+ *
+ * Descriptio: 'we have a dog in front of macbook'
  * @name: 'name of a dog'
  * @age: 'age of a dog'
  * @owner: 'owner of a dog'
  *
- * Return: Always 0.
 */
 struct dog
 {
@@ -15,5 +16,6 @@ struct dog
 	float age;
 	char *owner;
 }
+;
 
 #endif
