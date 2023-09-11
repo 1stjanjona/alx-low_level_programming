@@ -6,7 +6,7 @@
  *
  * Return: Always 0.
 */
-;struct dog;
+;
 int main (void)
 {
 	struct dog my_dog;
