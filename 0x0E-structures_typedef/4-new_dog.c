@@ -32,9 +32,9 @@ dog_t *new_dog(char *name, float age, char *owner)
 	}
 	if (newdog != NULL)
 	{
-		newdog->name = strdup(name);
+		strcpy(newdog->name, strdup(name));
 		newdog->age = age;
-		newdog->owner = strdup(owner);
+		strcpy(newdog->owner, strdup(owner));
 	}
 	return (newdog);
 	return (0);
