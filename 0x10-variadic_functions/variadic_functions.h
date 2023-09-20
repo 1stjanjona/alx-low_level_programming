@@ -1,6 +1,20 @@
 #ifndef VARIADIC_FUNCTIONS_H
 #define VARIADIC_FUNCTIONS_H
 
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+/**
+ * struct type - struct type
+ * @type: 'format type'
+ * @f: 'the pointer function'
+*/
+typedef struct type
+{
+	char *type;
+	void (*f)(char *, va_list);
+}type_t;
+
 int _putchar(char c);
 int sum_them_all(const unsigned int n, ...);
 void print_numbers(const char *separator, const unsigned int n, ...);
