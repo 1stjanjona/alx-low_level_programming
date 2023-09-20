@@ -16,9 +16,6 @@ void print_all(const char * const format, ...)
 	va_list args;
 
 	va_start(args, format);
-	if (!format || format[i] == '\0')
-		printf("\n");
-
 	while (format && format[i] != '\0')
 	{
 		switch (format[i])
@@ -47,6 +44,9 @@ void print_all(const char * const format, ...)
 			sep = ", ";
 		i++;
 	}
-	printf("\n");
+	if (!format || format[i] == '\0')
+	{
+		printf("\n");
+	}
 	va_end(args);
 }
