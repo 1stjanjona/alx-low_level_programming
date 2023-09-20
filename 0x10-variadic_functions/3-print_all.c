@@ -10,12 +10,12 @@
 */
 void print_all(const char * const format, ...)
 {
-	int i = 0, j = 0;
+	int i = 0;
 	char *str, *sep = " ";
 
-	va_list types;
+	va_list args;
 
-	va_start(types, format);
+	va_start(args, format);
 
 	while (format && format[i] != '\0')
 	{
@@ -39,10 +39,9 @@ void print_all(const char * const format, ...)
 				printf("%s%s", sep, str);
 				break;
 			default:
-				j = 1;
 				break;
 		}
-		if (j == 0)
+		if (format[i + 1] != '\0')
 		{
 			sep = ", ";
 		}
