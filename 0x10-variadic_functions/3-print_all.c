@@ -32,7 +32,8 @@ void print_all(const char * const format, ...)
 				str = va_arg(args, char *);
 				if (str == NULL)
 				{
-					printf("(nil)");
+					str = "(nil)";
+					printf("%s%s", sep, str);
 				}
 				printf("%s%s", sep, str);
 				break;
@@ -43,9 +44,6 @@ void print_all(const char * const format, ...)
 			sep = ", ";
 		i++;
 	}
-	if (!format || format[i] == '\0')
-	{
-		printf("\n");
-	}
+	printf("\n");
 	va_end(args);
 }
