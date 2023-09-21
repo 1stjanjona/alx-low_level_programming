@@ -2,6 +2,7 @@
 void winner(void) __attribute__ ((constructor));
 /**
  * winner - print the winner
+ * Description: print this before main
  * Return: no return
 */
 void winner(void)
