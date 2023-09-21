@@ -8,6 +8,10 @@ size_t print_list(const list_t *h)
 {
 	size_t num_node = 0;
 
+	if (h == NULL)
+	{
+		return (0);
+	}
 	for (num_node = 0; h->next != NULL; num_node++)
 	{
 		if (h->str == NULL)
