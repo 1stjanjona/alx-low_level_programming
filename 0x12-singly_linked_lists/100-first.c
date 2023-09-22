@@ -1,4 +1,6 @@
 #include "lists.h"
+#include <stdio.h>
+
 void winner(void) __attribute__((constructor));
 /**
  * winner - print the winner
