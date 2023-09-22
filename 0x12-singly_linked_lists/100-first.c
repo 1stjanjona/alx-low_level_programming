@@ -10,6 +10,9 @@ __attribute__ ((constructor)) void foo(void);
 */
 void foo(void)
 {
-	printf("you're beat! and yet, you must allow,\n"
-			"I bore my house upon my back!\n");
+	char *s;
+
+	s = "You're beat! and yet, you must allow,\nI bore my house upon my back!\n";
+
+	printf("%s", s);
 }
