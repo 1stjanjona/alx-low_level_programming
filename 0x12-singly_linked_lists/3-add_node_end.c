@@ -11,10 +11,6 @@ list_t *add_node_end(list_t **head, const char *str)
 	list_t *nwd = *head;
 	list_t *nvx;
 
-	while (str && str[len] != '\0')
-	{
-		len++;
-	}
 	if (str == NULL)
 	{
 		return (NULL);
@@ -25,25 +21,33 @@ list_t *add_node_end(list_t **head, const char *str)
 		return (NULL);
 	}
 	nvx->str = strdup(str);
+	while (str && str[len] != '\0')
+	{
+		len++;
+	}
+	nvx->len = len;
+	nvx->next = NULL;
+	nwd = *head;
 	if (nwd->str == NULL)
 	{
 		free(nwd);
 		return (NULL);
 	}
-	nvx->len = len;
-	nvx->next = NULL;
 	if (*head == NULL)
 	{
 		*head = nvx;
 	}
-	else
+	else if (nwd != NULL)
 	{
-		nwd = *head;
 		while (nwd->next != NULL)
 		{
 			nwd = nwd->next;
 		}
 		nwd->next = nvx;
 	}
-	return (nvx);
+	else
+	{
+		*head = nvx;
+	}
+	return (*head);
 }
