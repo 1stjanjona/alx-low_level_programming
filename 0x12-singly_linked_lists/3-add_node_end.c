@@ -8,7 +8,7 @@
 list_t *add_node_end(list_t **head, const char *str)
 {
 	unsigned int len = 0;
-	list_t *nwd = *head;
+	list_t *nwd;
 	list_t *nvx;
 
 	if (str == NULL)
@@ -28,9 +28,9 @@ list_t *add_node_end(list_t **head, const char *str)
 	nvx->len = len;
 	nvx->next = NULL;
 	nwd = *head;
-	if (nwd->str == NULL)
+	if (nvx->str == NULL)
 	{
-		free(nwd);
+		free(nvx);
 		return (NULL);
 	}
 	if (*head == NULL)
@@ -39,15 +39,12 @@ list_t *add_node_end(list_t **head, const char *str)
 	}
 	else if (nwd != NULL)
 	{
+		nwd = *head;
 		while (nwd->next != NULL)
 		{
 			nwd = nwd->next;
 		}
 		nwd->next = nvx;
 	}
-	else
-	{
-		*head = nvx;
-	}
-	return (*head);
+	return (nvx);
 }
