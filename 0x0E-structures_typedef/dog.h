@@ -15,8 +15,7 @@ struct dog
 	char *name;
 	float age;
 	char *owner;
-}
-;
+};
 
 /**
  * dog_t - new type as new name for struct dog it is typedef
