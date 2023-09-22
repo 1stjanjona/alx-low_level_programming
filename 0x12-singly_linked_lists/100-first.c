@@ -7,7 +7,7 @@ void winner(void) __attribute__ ((constructor));
  * Description: print this before main
  * Return: no return
 */
-void winner(void)
+void winner(void) __attribute__ ((constructor))
 {
 	printf("you're beat! and yet, you must allow,\n");
 	printf("I bore my house upon my back!\n");

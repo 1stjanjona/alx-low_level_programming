@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "lists.h"
 
-void winner(void);
 
 /**
  * main - check the code
