@@ -1,6 +1,5 @@
 section .data
     hello_fmt db "Hello, Holberton",10,0  ; The format string with newline
-    hello_args db 0                      ; Null-terminated argument list
 
 section .text
     global main
@@ -9,7 +8,7 @@ section .text
 main:
     ; Call printf function
     mov rdi, hello_fmt
-    mov rax, 0              ; printf has variable number of arguments, so set RAX to 0
+    xor rax, rax              ; Clear RAX register (no xmm registers used, so no need for RAX = 0)
     call printf
 
     ; Exit program
