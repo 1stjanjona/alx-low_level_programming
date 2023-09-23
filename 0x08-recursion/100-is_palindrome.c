@@ -8,7 +8,9 @@
 */
 int is_palindrome(char *s)
 {
-	int len = 0, i, j;
+	int len = 0;
+	int i = 0;
+	int j;
 
 	if (s == NULL)
 	{
@@ -18,18 +20,11 @@ int is_palindrome(char *s)
 	{
 		len++;
 	}
-	for (i = 0; i < len && s[i]; i++)
+	for (i = 0, j = len - 1; i < len; i++, j--)
 	{
-		for (j = len - 1; j > i && s[j]; j--)
+		if (s[i] != s[j])
 		{
-			if (s[i] != s[j])
-			{
-				return (0);
-			}
-			else
-			{
-				return (1);
-			}
+			return (0);
 		}
 	}
 	return (1);
