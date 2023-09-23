@@ -9,24 +9,18 @@
 */
 int is_prime_number(int n)
 {
-	int i = 1;
-	int d;
+	int i;
 
-	d = n / i;
-	if (i >= 1 && i <= n)
+	if (n <= 1)
 	{
-		if (d == 1)
-		{
-			return (1);
-		}
-		else if (n % d == 0)
+		return (0);
+	}
+	for (i = 2; (i * i) <= n; i++)
+	{
+		if ((n % i) == 0)
 		{
 			return (0);
 		}
 	}
-	else
-	{
-		return (0);
-	}
-	return (0);
+	return (1);
 }
