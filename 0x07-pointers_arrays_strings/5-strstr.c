@@ -3,28 +3,30 @@
 
 /**
  * *_strstr - check the substring
- *
  * @haystack: 'string'
  * @needle: 'substring'
- *
  * Return: return (needle), or return(NULL) if the substring is not found
 */
 char *_strstr(char *haystack, char *needle)
 {
+	char *h, *n;
+
+	if (*needle == '\0')
+	{
+		return (haystack);
+	}
 	while (*haystack != '\0')
 	{
-		if (*needle == *haystack)
+		h = haystack;
+		n = needle;
+		while ((*n != '\0') && (*h == *n))
 		{
-			haystack++;
-			needle++;
+			h++;
+			n++;
 		}
-		else if (*needle != '\0')
+		if (*n == '\0')
 		{
-			return (needle);
-		}
-		else if (*needle == '\0')
-		{
-			return (NULL);
+			return (haystack);
 		}
 		haystack++;
 	}
