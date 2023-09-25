@@ -7,7 +7,6 @@
 int pop_listint(listint_t **head)
 {
 	listint_t *current;
-	listint_t *pass;
 	int data_n;
 
 	if (*head == NULL || head == NULL)
@@ -15,12 +14,9 @@ int pop_listint(listint_t **head)
 		return (0);
 	}
 	current = *head;
-	while (current != NULL)
-	{
-		data_n = current->n;
-		pass = current->next;
-		free(current);
-		current = pass;
-	}
+	data_n = current->n;
+	*head = current->next;
+	free(current);
+
 	return (data_n);
 }
