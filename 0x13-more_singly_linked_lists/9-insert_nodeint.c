@@ -25,9 +25,8 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	nsrt->next = NULL;
 	if (idx == 0)
 	{
-		pass = *head;
-		nsrt->next = pass;
-		pass = nsrt;
+		nsrt->next = *head;
+		*head = nsrt;
 		return (nsrt);
 	}
 	pass = *head;
