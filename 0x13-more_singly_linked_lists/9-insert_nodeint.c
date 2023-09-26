@@ -30,7 +30,7 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 		return (nsrt);
 	}
 	pass = *head;
-	while (pass != NULL && x < idx)
+	while (pass != NULL && x < (idx - 1))
 	{
 		pass = pass->next;
 		x++;
