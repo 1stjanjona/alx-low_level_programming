@@ -6,7 +6,7 @@
 */
 listint_t *reverse_listint(listint_t **head)
 {
-	listint_t *rvrsd;
+	listint_t *rvrsd = NULL;
 	listint_t *pass;
 	listint_t *current;
 
