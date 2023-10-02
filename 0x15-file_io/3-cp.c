@@ -1,42 +1,33 @@
 #include "main.h"
 /**
- * _dprintf- dprintf the error and exit
- * @code: the writtwn code
- * @message: message to printed
- * @file_name:: file name
- * Return: no return
-*/
-void _dprintf(int code, const char *message, const char *file_name)
-{
-	dprintf(2, message, file_name);
-	exit(code);
-}
-/**
- * cp_file - copy content from file to another file
+ * main - copy content from file to another file
  * @argc: argument count
  * @argv: argument vector
- * Return: too much returns
+ * Return: on succes return (0)
 */
-int cp_file(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-	int fd1, fd2;
+	int fd1 = 0, fd2 = 0;
 	ssize_t bts_rd, bts_wr;
 	char bfr[BUF_SIZE];
 
 	if (argc != 3)
 	{
-		_dprintf(97, "Usage: cp file_from file_to\n", NULL);
+		dprintf(STDERR_FILENO, USAGE);
+		exit(97);
 	}
 	fd1 = open(argv[1], O_RDONLY);
 	if (fd1 == -1)
 	{
-		_dprintf(98, "Error: Can't read from file %s\n", argv[1]);
+		dprintf(STDERR_FILENO, ERR_NOREAD, argv[1]);
+		exit(98);
 	}
-	fd2 = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	fd2 = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, PERMISSIONS);
 	if (fd2 == -1)
 	{
 		close(fd1);
-		_dprintf(99, "Error: Can't write to filr %s\n", argv[2]);
+		dprintf(STDERR_FILENO, ERR_NOWRITE, argv[2]);
+		exit(99);
 	}
 	while ((bts_rd = read(fd1, bfr, BUF_SIZE)) > 0)
 	{
@@ -45,18 +36,28 @@ int cp_file(int argc, char *argv[])
 		{
 			close(fd1);
 			close(fd2);
-			_dprintf(99, "Error: Can't write to file %s\n", argv[2]);
+			dprintf(STDERR_FILENO, ERR_NOWRITE, argv[2]);
+			exit(99);
 		}
 	}
 	if (bts_rd == -1)
 	{
 		close(fd1);
 		close(fd2);
-		_dprintf(98, "Error: can't read from file %s\n", argv[1]);
+		dprintf(STDERR_FILENO, ERR_NOREAD, argv[1]);
+		exit(98);
 	}
-	if (close(fd1) == -1 || close(fd2) == -1)
+	fd1 = close(fd1);
+	fd2 = close(fd2);
+	if (fd1)
 	{
-		_dprintf(100, "Error: Can't close fd %d\n", (fd1 == -1) ? fd1 : fd2);
+		dprintf(STDERR_FILENO, ERR_NOCLOSE, fd1);
+		exit(100);
 	}
-	return (0);
+	if (fd2)
+	{
+		dprintf(STDERR_FILENO, ERR_NOCLOSE, fd1);
+		exit(100);
+	}
+	return (EXIT_SUCCESS);
 }
