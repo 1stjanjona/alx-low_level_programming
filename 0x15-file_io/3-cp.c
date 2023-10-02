@@ -39,11 +39,11 @@ int main(int argc, char *argv[])
 	}
 	if (close(fd1) == -1)
 	{
-		dprintf(STDERR_FILENO, ERR_NOCLOSE, fd1), exit(100);
+		dprintf(STDERR_FILENO, ERR_NOCLOSE, strerror(errno)), exit(100);
 	}
 	if (close(fd2) == -1)
 	{
-		dprintf(STDERR_FILENO, ERR_NOCLOSE, fd2), exit(100);
+		dprintf(STDERR_FILENO, ERR_NOCLOSE, strerror(errno)), exit(100);
 	}
 	return (EXIT_SUCCESS);
 }
