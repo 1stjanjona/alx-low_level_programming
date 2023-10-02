@@ -12,52 +12,38 @@ int main(int argc, char *argv[])
 	char bfr[BUF_SIZE];
 
 	if (argc != 3)
-	{
-		dprintf(STDERR_FILENO, USAGE);
-		exit(97);
-	}
+		dprintf(STDERR_FILENO, USAGE), exit(97);
 	fd1 = open(argv[1], O_RDONLY);
 	if (fd1 == -1)
 	{
-		dprintf(STDERR_FILENO, ERR_NOREAD, argv[1]);
-		exit(98);
+		dprintf(STDERR_FILENO, ERR_NOREAD, argv[1]), exit(98);
 	}
 	fd2 = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, PERMISSIONS);
 	if (fd2 == -1)
 	{
-		close(fd1);
-		dprintf(STDERR_FILENO, ERR_NOWRITE, argv[2]);
-		exit(99);
+		close(fd1), dprintf(STDERR_FILENO, ERR_NOWRITE, argv[2]), exit(99);
 	}
 	while ((bts_rd = read(fd1, bfr, BUF_SIZE)) > 0)
 	{
 		bts_wr = write(fd2, bfr, bts_rd);
 		if (bts_wr != bts_rd)
 		{
-			close(fd1);
-			close(fd2);
-			dprintf(STDERR_FILENO, ERR_NOWRITE, argv[2]);
-			exit(99);
+			close(fd1), close(fd2);
+			dprintf(STDERR_FILENO, ERR_NOWRITE, argv[2]), exit(99);
 		}
 	}
 	if (bts_rd == -1)
 	{
-		close(fd1);
-		close(fd2);
-		dprintf(STDERR_FILENO, ERR_NOREAD, argv[1]);
-		exit(98);
+		close(fd1), close(fd2);
+		dprintf(STDERR_FILENO, ERR_NOREAD, argv[1]), exit(98);
 	}
-	fd1 = close(fd1);
-	fd2 = close(fd2);
-	if (fd1)
+	if (close(fd1) == -1)
 	{
-		dprintf(STDERR_FILENO, ERR_NOCLOSE, fd1);
-		exit(100);
+		dprintf(STDERR_FILENO, ERR_NOCLOSE, fd1), exit(100);
 	}
-	if (fd2)
+	if (close(fd2) == -1)
 	{
-		dprintf(STDERR_FILENO, ERR_NOCLOSE, fd1);
-		exit(100);
+		dprintf(STDERR_FILENO, ERR_NOCLOSE, fd2), exit(100);
 	}
 	return (EXIT_SUCCESS);
 }
