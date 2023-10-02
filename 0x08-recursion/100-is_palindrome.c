@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stddef.h>
+#include <string.h>
 
 /**
  * is_palindrome - check for palindrome
@@ -8,24 +9,18 @@
 */
 int is_palindrome(char *s)
 {
-	int len = 0;
-	int i = 0;
-	int j;
+	int len = strlen(s);
 
-	if (s == NULL)
+	if (len <= 1)
+	{
+		return (1);
+	}
+	if (s[0] != s[len - 1])
 	{
 		return (0);
 	}
-	while (s && s[len] != '\0')
-	{
-		len++;
-	}
-	for (i = 0, j = len - 1; i < len; i++, j--)
-	{
-		if (s[i] != s[j])
-		{
-			return (0);
-		}
-	}
-	return (1);
+	s++;
+	len -= 2;
+
+	return (is_palindrome(s + 1));
 }

@@ -4,29 +4,48 @@
 /**
  * main - check Fibonacci code
  *
- * Description: 'print first 50'
+ * Description: 'print first 98'
  *
  * Return: Always 0.
 */
 
-int main(void)
+/**
+ * print_fibonacci - print fibonacci
+ * @n: number to be printed
+ * Return: No return
+*/
+void print_fibonacci(int n)
 {
 	int i;
-	unsigned long fib = 0, fibo = 1, sum;
+	unsigned long fib = 1, fibo = 2, sum;
 
-	for (i = 0; i < 50; i++)
+	if (n >= 1)
+	{
+		printf("%lu", fib);
+		if (n > 1)
+		{
+			printf(", ");
+		}
+	}
+	if (n >= 2)
+	{
+		printf("%lu", fibo);
+		if (n > 2)
+		{
+			printf(", ");
+		}
+	}
+	for (int i = 3; i <= n; i++)
 	{
 		sum = fib + fibo;
-		printf("%lu", sum);
+		printf(", %d", sum);
 		fib = fibo;
 		fibo = sum;
-
-		if (i == 49)
-		{
-			printf("\n");
-		}
-		else
-			printf(", ");
 	}
+	printf("\n");
+}
+int main(void)
+{
+	print_fibonacci(98);
 	return (0);
 }
