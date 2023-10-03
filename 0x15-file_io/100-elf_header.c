@@ -1,4 +1,6 @@
 #include "main.h"
+#include <string.h>
+#include <fcntl.h>
 #include <elf.h>
 /**
  * display_elf_header - to display elf header
@@ -12,18 +14,19 @@ void display_elf_header(const char *filename)
 
 	if (fd == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Unable to open file");
+		dprintf(STDERR_FILENO, "Error: Unable to open file"), exit(98);
 	}
 	Elf64_Ehdr elf_header;
 
 	if (read(fd, &elf_header, sizeof(Elf64_Ehdr)) != sizeof(Elf64_Ehdr))
 	{
-		dprintf(STDERR_FILENO, "Error: Unable to read ELF header");
+		close(fd);
+		dprintf(STDERR_FILENO, "Error: Unable to read ELF header"), exit(98);
 	}
 	close(fd);
 	if (!is_elf_file(&elf_header))
 	{
-		dprintf(STRDERR_FILENO, "Error: Not an ELF file");
+		dprintf(STDERR_FILENO, "Error: Not an ELF file"), exit(98);
 	}
 	printf("ELF Header:\n");
 	printf("  Magic:   ");
@@ -32,6 +35,7 @@ void display_elf_header(const char *filename)
 		printf("%01x ", elf_header.e_ident[i]);
 	}
 	printf("\n");
+	display_elf_header_info(&elf_header);
 }
 /**
  * display_elf_header_info - details of elf header info
@@ -76,24 +80,9 @@ void display_elf_header_info(const Elf64_Ehdr *elf_header)
 */
 int is_elf_file(const Elf64_Ehdr *elf_header)
 {
-	switch (elf_header->e_ident[EI_MAG0])
+	if (memcmp(elf_header->e_ident, ELFMAG, SELFMAG) == 0)
 	{
-		case ELFMAG0:
-			switch (elf_header->e_ident[EI_MAG1])
-			{
-				case ELFMAG1:
-					switch (elf_header->e_ident[EI_MAG2])
-					{
-						case ELFMAG2:
-							if (elf_header->e_ident[EI_MAG3] == ELFMAG3)
-							{
-								return (1);
-							}
-							break;
-					}
-					break;
-			}
-			break;
+		return (1);
 	}
 	return (0);
 }
