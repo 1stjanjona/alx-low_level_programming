@@ -3,101 +3,111 @@
 #include <fcntl.h>
 #include <elf.h>
 /**
- * display_elf_header - to display elf header
- * @filename : file name
+ *  check_elf_header - to display elf header
+ * @ei_ident: ident to handle
  * Return: no return
 */
-void display_elf_header(const char *filename)
+void check_elf_header(unsigned char *ei_ident)
 {
-	int i = 0;
-	int fd = open(filename, O_RDONLY);
+	int i;
 
-	if (fd == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Unable to open file"), exit(98);
-	}
-	Elf64_Ehdr elf_header;
-
-	if (read(fd, &elf_header, sizeof(Elf64_Ehdr)) != sizeof(Elf64_Ehdr))
-	{
-		close(fd);
-		dprintf(STDERR_FILENO, "Error: Unable to read ELF header"), exit(98);
-	}
-	close(fd);
-	if (!is_elf_file(&elf_header))
-	{
-		dprintf(STDERR_FILENO, "Error: Not an ELF file"), exit(98);
-	}
-	printf("ELF Header:\n");
-	printf("  Magic:   ");
 	for (i = 0; i < EI_NIDENT; i++)
 	{
-		printf("%01x ", elf_header.e_ident[i]);
+		if (ei_ident[i] != ELFMAG[i])
+		{
+			dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
+			exit(98);		
+		}
 	}
-	printf("\n");
-	display_elf_header_info(&elf_header);
 }
 /**
- * display_elf_header_info - details of elf header info
- * @elf_header: elf header
+ * display_magic - display magic
+ * @ei_edent: ident to handle
  * Return: no return
 */
-void display_elf_header_info(const Elf64_Ehdr *elf_header)
+void display_magic(unsigned char *ei_ident)
 {
-	printf("  Class:                         ");
-	switch (elf_header->e_ident[EI_CLASS])
+	int i;
+
+	printf(" Magic: ");
+	for (i = 0; i < EI_NIDENT; i++)
 	{
-		case ELFCLASS32:
-			printf("ELF32\n");
-			break;
-		case ELFCLASS64:
-			printf("ELF64\n");
-			break;
-		default:
-			printf("Unknwon\n");
+		printf("%02x ", ei_ident[i]);
+		if (i == EI_NIDENT - 1)
+		{
+			printf("\n");
+		}
+		else
+		{
+			printf(" ");
+		}
 	}
-	printf("   Data             ");
-	switch (elf_header->e_ident[EI_DATA])
-	{
-		case ELFDATA2LSB:
-			printf("2's complement, little endian\n");
-			break;
-		case ELFDATA2MSB:
-			printf("2's complement, big endian\n");
-			break;
-		default:
-			printf("Unknown\n");
-	}
-	printf("   Version:         %d (current)\n", elf_header->e_ident[EI_VERSION]);
-	printf("   OS/ABI:          %d\n", elf_header->e_ident[EI_OSABI]);
-	printf("   ABI Version:     %d\n", elf_header->e_ident[EI_ABIVERSION]);
-	printf("   Type:            %d\n", elf_header->e_type);
 }
 /**
- * is_elf_file - check if elf is a file
- * @elf_header: header file
+ * display_class - display class
+ * @ei_class: ident to handle
+ * Return: no return
+*/
+void display_class(unsigned char *ei_class)
+{
+	printf(" Class: ");
+	switch (ei_class[EI_CLASS])
+    switch (ei_class)
+    {
+    case ELFCLASS32:
+        printf("Class: 32-bit\n");
+        break;
+    case ELFCLASS64:
+        printf("Class: 64-bit\n");
+        break;
+    default:
+        printf("Class: unknown\n");
+        break;
+    }
+}
+/**
+ * main - main function for elf header
+ * @argc: argument count
+ * @argv: argument vector
  * Return: return (0)
 */
-int is_elf_file(const Elf64_Ehdr *elf_header)
+int main(int __attribute__((__unused)) argc, char *argv[])
 {
-	if (memcmp(elf_header->e_ident, ELFMAG, SELFMAG) == 0)
+	int o, r;
+	Elf64_Ehdr *header;
+
+	o = open(argv[1], O_RDONLY);
+	if (o == -1)
 	{
-		return (1);
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+		exit(98);
 	}
-	return (0);
-}
-/**
- * main - main function for elf
- * @argc: argument count
- * @argv: argument vectour
- * Return: return (2)
-*/
-int main(int argc, char *argv)
-{
-	if (argc != 2)
+	header = malloc(sizeof(Elf64_Ehdr));
+	if (header == NULL)
 	{
-		dprintf(STDERR_FILENO, "Usage: elf_header elf_filename"), exit(98);
+		close_elf(o);
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+		exit(98);
 	}
-	display_elf_header(argv[1]);
+	r = read(o, header, sizeof(Elf64_Ehdr));
+	if (r == -1)
+	{
+		free(header);
+		close_elf(o);
+		dprintf(STDERR_FILENO, "Error: '%s': No such file\n", argv[1]);
+		exit(98);
+	}
+	check_elf_header(header->ei_ident);
+	printf("Elf Header:\n");
+	display_magic(header->ei_ident);
+	display_class(header->ei_ident);
+	display_data(header->ei_ident);
+	display_vesrion(header->ei_ident);
+	display_osabi(header->ei_ident);
+	display_abi(header->ei_ident);
+	display_type(header->e_type, header->e_ident);
+	display_entry(header->e_entry, header->ei_ident);
+	close_elf(o);
+	free(header);
 	return (0);
 }
