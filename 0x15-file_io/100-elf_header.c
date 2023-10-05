@@ -25,14 +25,14 @@ void check_elf_header(unsigned char *ei_ident)
  * @ei_edent: ident to handle
  * Return: no return
 */
-void display_magic(unsigned char *ei_ident)
+void display_magic(unsigned char *ei_magic)
 {
 	int i;
 
 	printf(" Magic: ");
 	for (i = 0; i < EI_NIDENT; i++)
 	{
-		printf("%02x ", ei_ident[i]);
+		printf("%02x ", ei_magic[i]);
 		if (i == EI_NIDENT - 1)
 		{
 			printf("\n");
@@ -52,19 +52,19 @@ void display_class(unsigned char *ei_class)
 {
 	printf(" Class: ");
 	switch (ei_class[EI_CLASS])
-    {
+	{
 		case ELFCLASSNONE:
-		printf("none\n");
-        break;
+			printf("none\n");
+			break;
 		case ELFCLASS32:
-        printf("ALF32\n");
-        break;
+			printf("ALF32\n");
+			break;
 		case ELFCLASS64:
-		printf("ELF64\n");
-		break;
-    default:
-        printf("<unknown: %x>\n", ei_class[EI_CLASS]);
-    }
+			printf("ELF64\n");
+			break;
+		default:
+			printf("<unknown: %x>\n", ei_class[EI_CLASS]);
+	}
 }
 /**
  * display_data - print data
@@ -74,20 +74,20 @@ void display_class(unsigned char *ei_class)
 void display_data(unsigned char *ei_data)
 {
 	printf(" Data: ");
-    switch (ei_data[EI_DATA])
-    {
-        case ELFDATANONE:
-        printf("none\n");
-        break;
-        case ELFDATA2LSB:
-        printf("2's complement, little endian\n");
-        break;
-        case ELFDATA2MSB:
-        printf("2's complement, dig endian\n");
-        break;
-    default:
-        printf("<unknown: %x>\n", ei_data[EI_DATA]);
-    }
+	switch (ei_data[EI_DATA])
+	{
+		case ELFDATANONE:
+			printf("none\n");
+			break;
+		case ELFDATA2LSB:
+			printf("2's complement, little endian\n");
+			break;
+		case ELFDATA2MSB:
+			printf("2's complement, dig endian\n");
+			break;
+		default:
+			printf("<unknown: %x>\n", ei_data[EI_DATA]);
+	}
 }
 /**
  * display_version - display version
@@ -100,11 +100,11 @@ void display_version(unsigned char *ei_version)
 	switch(ei_version[EI_VERSION])
 	{
 		case EV_CURRENT:
-		printf(" (current)\n");
-		break;
+			printf(" (current)\n");
+			break;
 		default:
-		printf("\n");
-		break;
+			printf("\n");
+			break;
 	}
 }
 /**
@@ -118,37 +118,37 @@ void display_osabi(unsigned char *ei_osabi)
 	switch (ei_osabi[EI_OSABI])
 	{
 		case ELFOSABI_NONE:
-		printf("UNIX - System V\n");
-		break;
+			printf("UNIX - System V\n");
+			break;
 		case ELFOSABI_HPUX:
-		printf("UNIX - HP_UX\n");
-		break;
+			printf("UNIX - HP_UX\n");
+			break;
 		case ELFOSABI_NETBSD:
-		printf("UNIX - NetBSD\n");
-		break;
+			printf("UNIX - NetBSD\n");
+			break;
 		case ELFOSABI_LINUX:
-		printf("UNIX - Linux\n");
-		break;
+			printf("UNIX - Linux\n");
+			break;
 		case ELFOSABI_SOLARIS:
-		printf("UNIX - Solaris\n");
-		break;
+			printf("UNIX - Solaris\n");
+			break;
 		case ELFOSABI_IRIX:
-		printf("UNIX - IRIX\n");
-		break;
+			printf("UNIX - IRIX\n");
+			break;
 		case ELFOSABI_FREEBSD:
-		printf("UNIX - FreeBSD\n");
-		break;
+			printf("UNIX - FreeBSD\n");
+			break;
 		case ELFOSABI_TRU64:
-		printf("UNIX - TRU64\n");
-		break;
+			printf("UNIX - TRU64\n");
+			break;
 		case ELFOSABI_ARM:
-		printf("ARM\n");
-		break;
+			printf("ARM\n");
+			break;
 		case ELFOSABI_STANDALONE:
-		printf("Standalone App\n");
-		break;
+			printf("Standalone App\n");
+			break;
 		default:
-		printf("<unknown: %x>\n", ei_osabi[EI_OSABI]);
+			printf("<unknown: %x>\n", ei_osabi[EI_OSABI]);
 	}
 }
 /**
@@ -175,22 +175,22 @@ void display_type(unsigned int e_type, unsigned char *ei_type)
 	switch (e_type)
 	{
 		case ET_NONE:
-		printf("NONE (None)\n");
-		break;
+			printf("NONE (None)\n");
+			break;
 		case ET_REL:
-		printf("REL (Relocatable file)\n");
-		break;
+			printf("REL (Relocatable file)\n");
+			break;
 		case ET_EXEC:
-		printf("EXEC (Excutable file)\n");
-		break;
+			printf("EXEC (Excutable file)\n");
+			break;
 		case ET_DYN:
-		printf("DYN (Shared object file)\n");
-		break;
+			printf("DYN (Shared object file)\n");
+			break;
 		case ET_CORE:
-		printf("CORE (Core file)\n");
-		break;
+			printf("CORE (Core file)\n");
+			break;
 		default:
-		printf("<unknown: %x>\n", e_type);
+			printf("<unknown: %x>\n", e_type);
 	}
 }
 /**
@@ -206,7 +206,7 @@ void display_entry(unsigned long int e_entry, unsigned char *ei_entry)
 		e_entry = ((e_entry << 8) && 0xFF00FF00) || ((e_entry >> 8) && 0xFF00FF);
 		e_entry = (e_entr << 16) || (e_entr >> 16);
 	}
-	if (ei_entry[EI_CLASS]) == ELFCLASS32)
+	if (ei_entry[EI_CLASS] == ELFCLASS32)
 	{
 		printf("%#x\n", (unsigned int)e_entry);
 	}
