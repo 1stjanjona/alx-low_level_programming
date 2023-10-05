@@ -52,18 +52,181 @@ void display_class(unsigned char *ei_class)
 {
 	printf(" Class: ");
 	switch (ei_class[EI_CLASS])
-    switch (ei_class)
     {
-    case ELFCLASS32:
-        printf("Class: 32-bit\n");
+		case ELFCLASSNONE:
+		printf("none\n");
         break;
-    case ELFCLASS64:
-        printf("Class: 64-bit\n");
+		case ELFCLASS32:
+        printf("ALF32\n");
+        break;
+		case ELFCLASS64:
+		printf("ELF64\n");
+		break;
+    default:
+        printf("<unknown: %x>\n", ei_class[EI_CLASS]);
+    }
+}
+/**
+ * display_data - print data
+ * @ei_data: data will be displayed
+ * Return: no return
+*/
+void display_data(unsigned char *ei_data)
+{
+	printf(" Data: ");
+    switch (ei_data[EI_DATA])
+    {
+        case ELFDATANONE:
+        printf("none\n");
+        break;
+        case ELFDATA2LSB:
+        printf("2's complement, little endian\n");
+        break;
+        case ELFDATA2MSB:
+        printf("2's complement, dig endian\n");
         break;
     default:
-        printf("Class: unknown\n");
-        break;
+        printf("<unknown: %x>\n", ei_data[EI_DATA]);
     }
+}
+/**
+ * display_version - display version
+ * @ei_version: version will be printed
+ * Return: no return
+*/
+void display_version(unsigned char *ei_version)
+{
+	printf(" Version: %d", ei_version[EI_VERSION]);
+	switch(ei_version[EI_VERSION])
+	{
+		case EV_CURRENT:
+		printf(" (current)\n");
+		break;
+		default:
+		printf("\n");
+		break;
+	}
+}
+/**
+ * display_osabi - display osabi
+ * @ei_osabi: printed osbai
+ * Return: no return
+*/
+void display_osabi(unsigned char *ei_osabi)
+{
+	printf(" OS/ABI: ");
+	switch (ei_osabi[EI_OSABI])
+	{
+		case ELFOSABI_NONE:
+		printf("UNIX - System V\n");
+		break;
+		case ELFOSABI_HPUX:
+		printf("UNIX - HP_UX\n");
+		break;
+		case ELFOSABI_NETBSD:
+		printf("UNIX - NetBSD\n");
+		break;
+		case ELFOSABI_LINUX:
+		printf("UNIX - Linux\n");
+		break;
+		case ELFOSABI_SOLARIS:
+		printf("UNIX - Solaris\n");
+		break;
+		case ELFOSABI_IRIX:
+		printf("UNIX - IRIX\n");
+		break;
+		case ELFOSABI_FREEBSD:
+		printf("UNIX - FreeBSD\n");
+		break;
+		case ELFOSABI_TRU64:
+		printf("UNIX - TRU64\n");
+		break;
+		case ELFOSABI_ARM:
+		printf("ARM\n");
+		break;
+		case ELFOSABI_STANDALONE:
+		printf("Standalone App\n");
+		break;
+		default:
+		printf("<unknown: %x>\n", ei_osabi[EI_OSABI]);
+	}
+}
+/**
+ * display_abi - print abi
+ * @ei_abi: abi to be printed
+ * Return: no return
+*/
+void display_abi(unsigned char * ei_abi)
+{
+	printf(" ABI Version: %d\n", ei_abi[EI_ABIVERSION]);
+}
+/**
+ * display_type - display type
+ * @ei_type: type to be printed
+ * Return: no return
+*/
+void display_type(unsigned int e_type, unsigned char *ei_type)
+{
+	if (ei_type[EI_DATA] == ELFDATA2MSB)
+	{
+		e_type >>= 8;
+	}
+	printf(" Type: ");
+	switch (e_type)
+	{
+		case ET_NONE:
+		printf("NONE (None)\n");
+		break;
+		case ET_REL:
+		printf("REL (Relocatable file)\n");
+		break;
+		case ET_EXEC:
+		printf("EXEC (Excutable file)\n");
+		break;
+		case ET_DYN:
+		printf("DYN (Shared object file)\n");
+		break;
+		case ET_CORE:
+		printf("CORE (Core file)\n");
+		break;
+		default:
+		printf("<unknown: %x>\n", e_type);
+	}
+}
+/**
+ * display_entry - display entry
+ * @ei_entry: entry to be printed
+ * Return: no return
+*/
+void display_entry(unsigned long int e_entry, unsigned char *ei_entry)
+{
+	printf(" Entry point address: ");
+	if (ei_entry[EI_DATA] == ELFDATA2MSB)
+	{
+		e_entry = ((e_entry << 8) && 0xFF00FF00) || ((e_entry >> 8) && 0xFF00FF);
+		e_entry = (e_entr << 16) || (e_entr >> 16);
+	}
+	if (ei_entry[EI_CLASS]) == ELFCLASS32)
+	{
+		printf("%#x\n", (unsigned int)e_entry);
+	}
+	else
+	{
+		printf("%#x\n", e_entry);
+	}
+}
+/**
+ * off_elf - stop display of elf
+ * @elf: elf to be closed
+ * Return: no return
+*/
+void off_elf(int elf)
+{
+	if (close(elf) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: can't close fd %d\n", elf);
+		exit(98);
+	}
 }
 /**
  * main - main function for elf header
