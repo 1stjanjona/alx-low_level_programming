@@ -16,13 +16,13 @@ void check_elf_header(unsigned char *ei_ident)
 		if (ei_ident[i] != ELFMAG[i])
 		{
 			dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
-			exit(98);		
+			exit(98);
 		}
 	}
 }
 /**
  * display_magic - display magic
- * @ei_edent: ident to handle
+ * @ei_magic: ident to handle
  * Return: no return
 */
 void display_magic(unsigned char *ei_magic)
@@ -97,7 +97,7 @@ void display_data(unsigned char *ei_data)
 void display_version(unsigned char *ei_version)
 {
 	printf(" Version: %d", ei_version[EI_VERSION]);
-	switch(ei_version[EI_VERSION])
+	switch (ei_version[EI_VERSION])
 	{
 		case EV_CURRENT:
 			printf(" (current)\n");
@@ -156,12 +156,13 @@ void display_osabi(unsigned char *ei_osabi)
  * @ei_abi: abi to be printed
  * Return: no return
 */
-void display_abi(unsigned char * ei_abi)
+void display_abi(unsigned char *ei_abi)
 {
 	printf(" ABI Version: %d\n", ei_abi[EI_ABIVERSION]);
 }
 /**
  * display_type - display type
+ * @e_type: type
  * @ei_type: type to be printed
  * Return: no return
 */
@@ -195,6 +196,7 @@ void display_type(unsigned int e_type, unsigned char *ei_type)
 }
 /**
  * display_entry - display entry
+ * @e_entry: entry
  * @ei_entry: entry to be printed
  * Return: no return
 */
@@ -204,23 +206,23 @@ void display_entry(unsigned long int e_entry, unsigned char *ei_entry)
 	if (ei_entry[EI_DATA] == ELFDATA2MSB)
 	{
 		e_entry = ((e_entry << 8) && 0xFF00FF00) || ((e_entry >> 8) && 0xFF00FF);
-		e_entry = (e_entr << 16) || (e_entr >> 16);
+		e_entry = (e_entry << 16) || (e_entry >> 16);
 	}
 	if (ei_entry[EI_CLASS] == ELFCLASS32)
 	{
-		printf("%#x\n", (unsigned int)e_entry);
+		printf("%#lx\n", (unsigned long int)e_entry);
 	}
 	else
 	{
-		printf("%#x\n", e_entry);
+		printf("%#lx\n", e_entry);
 	}
 }
 /**
- * off_elf - stop display of elf
+ * close_elf - stop display of elf
  * @elf: elf to be closed
  * Return: no return
 */
-void off_elf(int elf)
+void close_elf(int elf)
 {
 	if (close(elf) == -1)
 	{
@@ -234,10 +236,11 @@ void off_elf(int elf)
  * @argv: argument vector
  * Return: return (0)
 */
-int main(int __attribute__((__unused)) argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	int o, r;
 	Elf64_Ehdr *header;
+	(void)argc;
 
 	o = open(argv[1], O_RDONLY);
 	if (o == -1)
@@ -260,16 +263,16 @@ int main(int __attribute__((__unused)) argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: '%s': No such file\n", argv[1]);
 		exit(98);
 	}
-	check_elf_header(header->ei_ident);
+	check_elf_header(header->e_ident);
 	printf("Elf Header:\n");
-	display_magic(header->ei_ident);
-	display_class(header->ei_ident);
-	display_data(header->ei_ident);
-	display_vesrion(header->ei_ident);
-	display_osabi(header->ei_ident);
-	display_abi(header->ei_ident);
+	display_magic(header->e_ident);
+	display_class(header->e_ident);
+	display_data(header->e_ident);
+	display_version(header->e_ident);
+	display_osabi(header->e_ident);
+	display_abi(header->e_ident);
 	display_type(header->e_type, header->e_ident);
-	display_entry(header->e_entry, header->ei_ident);
+	display_entry(header->e_entry, header->e_ident);
 	close_elf(o);
 	free(header);
 	return (0);

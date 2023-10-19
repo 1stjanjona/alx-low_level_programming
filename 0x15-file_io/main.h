@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
+#include <elf.h>
 
 #define BUF_SIZE 1024
 #define STDERR_FILENO 2
@@ -27,5 +28,6 @@ int main(int argc, char *argv[]);
 int is_elf_file(const Elf64_Ehdr *elf_header);
 void display_elf_header_info(const Elf64_Ehdr *elf_header);
 void display_elf_header(const char *filename);
+void display_error(const char *output);
 
 #endif
