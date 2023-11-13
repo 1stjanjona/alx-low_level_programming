@@ -1,19 +1,20 @@
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 /**
- * print_jackpot - print the win jackpot
+ * printf - print the win jackpot
  * @format: format
  * @...: ...
  * Return: exit with success
 */
-int print_jackpot(const char *format, ...)
+int printf(const char *format, ...)
 {
-	const char *output;
+	const char *output = "9 8 10 24 75 + 9\n";
 
-	output = "9 8 10 24 75 9\nCongratulations, you win the Jackpot!\n";
+	const char *message = "Congratulations, you win the Jackpot!\n";
 
-	write(1, output, 53);
-
+	write(1, output, 17);
+	write(1, message, 38);
 	exit(EXIT_SUCCESS);
 }
